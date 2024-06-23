@@ -1,3 +1,4 @@
+.
 ├── README.adoc
 ├── folder_structure.txt
 ├── sample-data
@@ -52,40 +53,39 @@
 │   ├── gradlew.bat
 │   ├── lombok.config
 │   ├── settings.gradle.kts
-│   ├── src
-│   │   ├── main
-│   │   │   ├── java
-│   │   │   │   └── com
-│   │   │   │       └── starter
-│   │   │   │           └── fullstack
-│   │   │   │               ├── StarterApp.java
-│   │   │   │               ├── api
-│   │   │   │               │   ├── Inventory.java
-│   │   │   │               │   ├── Product.java
-│   │   │   │               │   └── UnitOfMeasurement.java
-│   │   │   │               ├── config
-│   │   │   │               │   ├── StarterConfig.java
-│   │   │   │               │   ├── WebSecurityConfig.java
-│   │   │   │               │   └── WebSecurityProperties.java
-│   │   │   │               ├── dao
-│   │   │   │               │   ├── InventoryDAO.java
-│   │   │   │               │   └── ProductDAO.java
-│   │   │   │               └── rest
-│   │   │   │                   ├── InventoryController.java
-│   │   │   │                   └── ProductController.java
-│   │   │   └── resources
-│   │   │       └── application.properties
-│   │   └── test
-│   │       └── java
-│   │           └── com
-│   │               └── starter
-│   │                   └── fullstack
-│   │                       ├── dao
-│   │                       │   ├── InventoryDAOTest.java
-│   │                       │   └── ProductDAOTest.java
-│   │                       └── rest
-│   │                           └── ProductControllerTest.java
-│   └── test.java
+│   └── src
+│       ├── main
+│       │   ├── java
+│       │   │   └── com
+│       │   │       └── starter
+│       │   │           └── fullstack
+│       │   │               ├── StarterApp.java
+│       │   │               ├── api
+│       │   │               │   ├── Inventory.java
+│       │   │               │   ├── Product.java
+│       │   │               │   └── UnitOfMeasurement.java
+│       │   │               ├── config
+│       │   │               │   ├── StarterConfig.java
+│       │   │               │   ├── WebSecurityConfig.java
+│       │   │               │   └── WebSecurityProperties.java
+│       │   │               ├── dao
+│       │   │               │   ├── InventoryDAO.java
+│       │   │               │   └── ProductDAO.java
+│       │   │               └── rest
+│       │   │                   ├── InventoryController.java
+│       │   │                   └── ProductController.java
+│       │   └── resources
+│       │       └── application.properties
+│       └── test
+│           └── java
+│               └── com
+│                   └── starter
+│                       └── fullstack
+│                           ├── dao
+│                           │   ├── InventoryDAOTest.java
+│                           │   └── ProductDAOTest.java
+│                           └── rest
+│                               └── ProductControllerTest.java
 └── ui
     ├── package.json
     ├── public
@@ -130,4 +130,4 @@
         └── themes
             └── index.js
 
-63 directories, 69 files
+63 directories, 68 files
