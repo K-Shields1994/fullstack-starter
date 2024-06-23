@@ -1,4 +1,3 @@
-.
 ├── README.adoc
 ├── folder_structure.txt
 ├── sample-data
