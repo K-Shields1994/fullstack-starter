@@ -1,0 +1,133 @@
+├── README.adoc
+├── folder_structure.txt
+├── sample-data
+│   ├── import.sh
+│   ├── inventory.json
+│   └── product.json
+├── starter
+│   ├── bin
+│   │   ├── default
+│   │   ├── generated-sources
+│   │   │   └── annotations
+│   │   ├── generated-test-sources
+│   │   │   └── annotations
+│   │   ├── main
+│   │   │   ├── application.properties
+│   │   │   └── com
+│   │   │       └── starter
+│   │   │           └── fullstack
+│   │   │               ├── StarterApp.class
+│   │   │               ├── api
+│   │   │               │   ├── Inventory.class
+│   │   │               │   ├── Product.class
+│   │   │               │   └── UnitOfMeasurement.class
+│   │   │               ├── config
+│   │   │               │   ├── StarterConfig.class
+│   │   │               │   ├── WebSecurityConfig.class
+│   │   │               │   └── WebSecurityProperties.class
+│   │   │               ├── dao
+│   │   │               │   ├── InventoryDAO.class
+│   │   │               │   └── ProductDAO.class
+│   │   │               └── rest
+│   │   │                   ├── InventoryController.class
+│   │   │                   └── ProductController.class
+│   │   └── test
+│   │       └── com
+│   │           └── starter
+│   │               └── fullstack
+│   │                   ├── dao
+│   │                   │   ├── InventoryDAOTest.class
+│   │                   │   └── ProductDAOTest.class
+│   │                   └── rest
+│   │                       └── ProductControllerTest.class
+│   ├── build.gradle.kts
+│   ├── config
+│   │   └── checkstyle
+│   │       └── checkstyle.xml
+│   ├── gradle
+│   │   └── wrapper
+│   │       ├── gradle-wrapper.jar
+│   │       └── gradle-wrapper.properties
+│   ├── gradlew
+│   ├── gradlew.bat
+│   ├── lombok.config
+│   ├── settings.gradle.kts
+│   ├── src
+│   │   ├── main
+│   │   │   ├── java
+│   │   │   │   └── com
+│   │   │   │       └── starter
+│   │   │   │           └── fullstack
+│   │   │   │               ├── StarterApp.java
+│   │   │   │               ├── api
+│   │   │   │               │   ├── Inventory.java
+│   │   │   │               │   ├── Product.java
+│   │   │   │               │   └── UnitOfMeasurement.java
+│   │   │   │               ├── config
+│   │   │   │               │   ├── StarterConfig.java
+│   │   │   │               │   ├── WebSecurityConfig.java
+│   │   │   │               │   └── WebSecurityProperties.java
+│   │   │   │               ├── dao
+│   │   │   │               │   ├── InventoryDAO.java
+│   │   │   │               │   └── ProductDAO.java
+│   │   │   │               └── rest
+│   │   │   │                   ├── InventoryController.java
+│   │   │   │                   └── ProductController.java
+│   │   │   └── resources
+│   │   │       └── application.properties
+│   │   └── test
+│   │       └── java
+│   │           └── com
+│   │               └── starter
+│   │                   └── fullstack
+│   │                       ├── dao
+│   │                       │   ├── InventoryDAOTest.java
+│   │                       │   └── ProductDAOTest.java
+│   │                       └── rest
+│   │                           └── ProductControllerTest.java
+│   └── test.java
+└── ui
+    ├── package.json
+    ├── public
+    │   ├── config.json
+    │   ├── favicon.png
+    │   ├── index.html
+    │   ├── logo.png
+    │   ├── manifest.json
+    │   └── robots.txt
+    └── src
+        ├── components
+        │   ├── Form
+        │   │   └── TextField.js
+        │   ├── Products
+        │   │   ├── ProductDeleteModal.js
+        │   │   └── ProductFormModal.js
+        │   └── Table
+        │       └── index.js
+        ├── constants
+        │   └── units
+        │       └── index.js
+        ├── containers
+        │   ├── DesignLayout.js
+        │   ├── HomeContainer.js
+        │   ├── InventoryLayout.js
+        │   ├── ProductLayout.js
+        │   └── WelcomeLayout.js
+        ├── ducks
+        │   ├── alerts
+        │   │   └── index.js
+        │   ├── inventory
+        │   │   └── index.js
+        │   └── products
+        │       └── index.js
+        ├── hooks
+        │   └── index.js
+        ├── index.js
+        ├── middleware
+        │   └── index.js
+        ├── reducers
+        │   └── index.js
+        └── themes
+            └── index.js
+
+63 directories, 69 files
