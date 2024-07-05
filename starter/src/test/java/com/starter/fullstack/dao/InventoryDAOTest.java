@@ -2,6 +2,7 @@ package com.starter.fullstack.dao;
 
 import com.starter.fullstack.api.Inventory;
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.Resource;
 import org.junit.After;
 import org.junit.Assert;
@@ -52,4 +53,20 @@ public class InventoryDAOTest {
     List<Inventory> actualInventory = this.inventoryDAO.findAll();
     Assert.assertFalse(actualInventory.isEmpty());
   }
-}
+  @Test
+  public void create(){
+    Inventory inventory = new Inventory();
+    inventory.setName(NAME);
+    inventory.setProductType(PRODUCT_TYPE);
+    Inventory createdInventory = this.inventoryDAO.create(inventory);
+
+    Assert.assertNotNull(createdInventory.getId());
+    Assert.assertEquals(NAME, createdInventory.getName());
+    Assert.assertEquals(PRODUCT_TYPE, createdInventory.getProductType());
+
+    Optional<Inventory> retrievedInventory = Optional.ofNullable(this.mongoTemplate.findById(createdInventory.getId(), Inventory.class));
+    Assert.assertTrue(retrievedInventory.isPresent());
+    Assert.assertEquals(NAME, retrievedInventory.get().getName());
+    Assert.assertEquals(PRODUCT_TYPE, retrievedInventory.get().getProductType());
+  }
+ }
