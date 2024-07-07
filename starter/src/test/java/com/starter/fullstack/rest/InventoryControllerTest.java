@@ -1,7 +1,8 @@
+// TASK 2: Created a new Java file to
 package com.starter.fullstack.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.starter.fullstack.api.Product;
+import com.starter.fullstack.api.Inventory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,7 +16,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
-public class ProductControllerTest {
+public class InventoryControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -35,20 +35,20 @@ public class ProductControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private Product product;
+    private Inventory inventory;
 
     @Before
     public void setup() throws Throwable {
-        this.product = new Product();
-        this.product.setId("ID");
-        this.product.setName("TEST");
+        this.inventory = new Inventory();
+        this.inventory.setId("ID");
+        this.inventory.setName("TEST");
         // Sets the Mongo ID for us
-        this.product = this.mongoTemplate.save(this.product);
+        this.inventory = this.mongoTemplate.save(this.inventory);
     }
 
     @After
     public void teardown() {
-        this.mongoTemplate.dropCollection(Product.class);
+        this.mongoTemplate.dropCollection(Inventory.class);
     }
 
     /**
@@ -58,10 +58,10 @@ public class ProductControllerTest {
      */
     @Test
     public void findAll() throws Throwable {
-        this.mockMvc.perform(get("/products")
+        this.mockMvc.perform(get("/inventory")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json("[" + this.objectMapper.writeValueAsString(product) + "]"));
+                .andExpect(content().json("[" + this.objectMapper.writeValueAsString(inventory) + "]"));
     }
 
     /**
@@ -71,32 +71,17 @@ public class ProductControllerTest {
      */
     @Test
     public void create() throws Throwable {
-        this.product = new Product();
-        this.product.setId("OTHER ID");
-        this.product.setName("ALSO TEST");
-        this.mockMvc.perform(post("/products")
+        this.inventory = new Inventory();
+        this.inventory.setId("OTHER ID");
+        this.inventory.setName("ALSO TEST");
+        this.mockMvc.perform(post("/inventory")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(this.objectMapper.writeValueAsString(this.product)))
+                        .content(this.objectMapper.writeValueAsString(this.inventory)))
                 .andExpect(status().isOk());
 
-        Assert.assertEquals(2, this.mongoTemplate.findAll(Product.class).size());
-    }
-
-    /**
-     * Test remove endpoint.
-     *
-     * @throws Throwable see MockMvc
-     */
-    @Test
-    public void remove() throws Throwable {
-        this.mockMvc.perform(delete("/products")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("[\"" + this.product.getId() + "\"]"))
-                .andExpect(status().isOk());
-
-        Assert.assertEquals(0, this.mongoTemplate.findAll(Product.class).size());
+        Assert.assertEquals(2, this.mongoTemplate.findAll(Inventory.class).size());
     }
 }
+
 
