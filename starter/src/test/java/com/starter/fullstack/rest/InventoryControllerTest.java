@@ -44,7 +44,6 @@ public class InventoryControllerTest {
 
   private Inventory inventory;
 
-
   @Before
   public void setup() throws Throwable {
     this.inventory = new Inventory();
