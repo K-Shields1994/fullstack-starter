@@ -26,62 +26,70 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 public class InventoryControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+  //FIXED
+  private static final String INVENTORY_ID = "ID";
+  private static final String INVENTORY_NAME = "TEST";
+  private static final String URL_TEMPLATE = "/inventory";
+  private static final String OTHER_INV_ID = "OTHER ID";
+  private static final String ALSO_INV_NAME = "ALSO TEST";
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
+  @Autowired
+  private MockMvc mockMvc;
 
-    @Autowired
-    private ObjectMapper objectMapper;
+  @Autowired
+  private MongoTemplate mongoTemplate;
 
-    private Inventory inventory;
+  @Autowired
+  private ObjectMapper objectMapper;
 
-    @Before
-    public void setup() throws Throwable {
-        this.inventory = new Inventory();
-        this.inventory.setId("ID");
-        this.inventory.setName("TEST");
-        // Sets the Mongo ID for us
-        this.inventory = this.mongoTemplate.save(this.inventory);
-    }
+  private Inventory inventory;
 
-    @After
-    public void teardown() {
-        this.mongoTemplate.dropCollection(Inventory.class);
-    }
 
-    /**
-     * Test findAll endpoint.
-     *
-     * @throws Throwable see MockMvc
-     */
-    @Test
-    public void findAll() throws Throwable {
-        this.mockMvc.perform(get("/inventory")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().json("[" + this.objectMapper.writeValueAsString(inventory) + "]"));
-    }
+  @Before
+  public void setup() throws Throwable {
+    this.inventory = new Inventory();
+    this.inventory.setId(INVENTORY_ID); //FIXED
+    this.inventory.setName(INVENTORY_NAME); //FIXED
+    // Sets the Mongo ID for us
+    this.inventory = this.mongoTemplate.save(this.inventory);
+  }
 
-    /**
-     * Test create endpoint.
-     *
-     * @throws Throwable see MockMvc
-     */
-    @Test
-    public void create() throws Throwable {
-        this.inventory = new Inventory();
-        this.inventory.setId("OTHER ID");
-        this.inventory.setName("ALSO TEST");
-        this.mockMvc.perform(post("/inventory")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(this.objectMapper.writeValueAsString(this.inventory)))
-                .andExpect(status().isOk());
+  @After
+  public void teardown() {
+    this.mongoTemplate.dropCollection(Inventory.class);
+  }
 
-        Assert.assertEquals(2, this.mongoTemplate.findAll(Inventory.class).size());
-    }
+  /**
+   * Test findAll endpoint.
+   *
+   * @throws Throwable see MockMvc
+   */
+  @Test
+  public void findAll() throws Throwable {
+    this.mockMvc.perform(get(URL_TEMPLATE) //FIXED
+        .accept(MediaType.APPLICATION_JSON))
+      .andExpect(status().isOk())
+      .andExpect(content().json("[" + this.objectMapper.writeValueAsString(inventory) + "]"));
+  }
+
+  /**
+   * Test create endpoint.
+   *
+   * @throws Throwable see MockMvc
+   */
+  @Test
+  public void create() throws Throwable {
+    this.inventory = new Inventory();
+    this.inventory.setId(OTHER_INV_ID); //FIXED
+    this.inventory.setName(ALSO_INV_NAME); //FIXED
+    this.mockMvc.perform(post(URL_TEMPLATE)
+        .accept(MediaType.APPLICATION_JSON)
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(this.objectMapper.writeValueAsString(this.inventory)))
+      .andExpect(status().isOk());
+
+    Assert.assertEquals(2, this.mongoTemplate.findAll(Inventory.class).size());
+  }
 }
 
 
