@@ -72,6 +72,7 @@ public class InventoryControllerTest {
       .andExpect(content().json("[" + this.objectMapper.writeValueAsString(inventory) + "]"));
   }
 
+
   /**
    * Test create endpoint.
    *
