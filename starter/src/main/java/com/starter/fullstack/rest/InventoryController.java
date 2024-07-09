@@ -18,39 +18,39 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/inventory")
 public class InventoryController {
-    private final InventoryDAO inventoryDAO;
+  private final InventoryDAO inventoryDAO;
 
-    /**
-     * Default Constructor.
-     *
-     * @param inventoryDAO inventoryDAO.
-     */
-    public InventoryController(InventoryDAO inventoryDAO) {
-        Assert.notNull(inventoryDAO, "Inventory DAO must not be null.");
-        this.inventoryDAO = inventoryDAO;
-    }
+  /**
+   * Default Constructor.
+   *
+   * @param inventoryDAO inventoryDAO.
+   */
+  public InventoryController(InventoryDAO inventoryDAO) {
+    Assert.notNull(inventoryDAO, "Inventory DAO must not be null.");
+    this.inventoryDAO = inventoryDAO;
+  }
 
-    /**
-     * Find Products.
-     *
-     * @return List of Product.
-     */
-    @GetMapping
-    public List<Inventory> findInventories() {
-        return this.inventoryDAO.findAll();
-    }
+  /**
+   * Find Products.
+   *
+   * @return List of Product.
+   */
+  @GetMapping
+  public List<Inventory> findInventories() {
+    return this.inventoryDAO.findAll();
+  }
 
-    /**
-     * Create Inventory for PostMapping
-     *
-     * @param inventory Create Inventory
-     * @return Created Inventory
-     */
+  /**
+   * Create Inventory for PostMapping
+   *
+   * @param inventory Create Inventory
+   * @return Created Inventory
+   */
 
-    // TASK 2
-    @PostMapping
-    public Inventory create(@RequestBody Inventory inventory) {
-        return this.inventoryDAO.create(inventory);
-    }
+  // TASK 2
+  @PostMapping
+  public Inventory create(@RequestBody Inventory inventory) {
+    return this.inventoryDAO.create(inventory);
+  }
 }
 
