@@ -73,4 +73,19 @@ public class InventoryDAOTest {
     Assert.assertEquals(NAME, retrievedInventory.get().getName());
     Assert.assertEquals(PRODUCT_TYPE, retrievedInventory.get().getProductType());
   }
+
+  @Test
+  public void delete(){
+    Inventory inventory = new Inventory();
+    inventory.setName(NAME);
+    inventory.setProductType(PRODUCT_TYPE);
+    inventory = this.mongoTemplate.save(inventory);
+
+    Optional<Inventory> deletedInventory = this.inventoryDAO.delete(inventory.getId());
+    Assert.assertTrue(deletedInventory.isPresent());
+    Assert.assertEquals(inventory.getId(), deletedInventory.get().getId());
+
+    Optional<Inventory> retrievedInventory = this.inventoryDAO.retrieve(inventory.getId());
+    Assert.assertFalse(retrievedInventory.isPresent());
+  }
 }
