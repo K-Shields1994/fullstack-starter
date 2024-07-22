@@ -1,11 +1,9 @@
 package com.starter.fullstack.dao;
 
 import com.starter.fullstack.api.Inventory;
-
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.Resource;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

@@ -1,16 +1,15 @@
 package com.starter.fullstack.dao;
 
 import com.starter.fullstack.api.Inventory;
-
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
-import javax.validation.constraints.Null;
-
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.index.Index;
 import org.springframework.data.mongodb.core.index.IndexOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.util.Assert;
 
 /**
@@ -71,9 +70,9 @@ public class InventoryDAO {
    * @return Found Inventory.
    */
 
+  // CORRECTED 07/18/2024
   public Optional<Inventory> retrieve(String id) {
-    Inventory inventory = this.mongoTemplate.findById(id, Inventory.class);
-    return Optional.ofNullable(inventory);
+    return Optional.ofNullable(this.mongoTemplate.findById(id, Inventory.class));
   }
 
   /**
@@ -100,13 +99,9 @@ public class InventoryDAO {
    * @return Deleted Inventory.
    */
 
-  //TASK 3
+  // CORRECTED 07/22/2024
   public Optional<Inventory> delete(String id) {
-    Inventory inventory = this.mongoTemplate.findById(id, Inventory.class);
-    if (inventory != null) {
-      this.mongoTemplate.remove(inventory);
-      return Optional.of(inventory);
-    }
-    return Optional.empty();
+    Inventory inventory = this.mongoTemplate.findAndRemove(Query.query(Criteria.where("id").is(id)), Inventory.class);
+    return Optional.ofNullable(inventory);
   }
 }
