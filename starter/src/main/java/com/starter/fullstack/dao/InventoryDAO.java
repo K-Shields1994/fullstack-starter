@@ -8,6 +8,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.index.Index;
 import org.springframework.data.mongodb.core.index.IndexOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.util.Assert;
 
 /**
@@ -20,6 +22,7 @@ public class InventoryDAO {
 
   /**
    * Default Constructor.
+   *
    * @param mongoTemplate MongoTemplate.
    */
   public InventoryDAO(MongoTemplate mongoTemplate) {
@@ -39,6 +42,7 @@ public class InventoryDAO {
 
   /**
    * Find All Inventory.
+   *
    * @return List of found Inventory.
    */
   public List<Inventory> findAll() {
@@ -47,6 +51,7 @@ public class InventoryDAO {
 
   /**
    * Save Inventory.
+   *
    * @param inventory Inventory to Save/Update.
    * @return Created/Updated Inventory.
    */
@@ -60,32 +65,43 @@ public class InventoryDAO {
 
   /**
    * Retrieve Inventory.
+   *
    * @param id Inventory id to Retrieve.
    * @return Found Inventory.
    */
+
+  // CORRECTED 07/18/2024
   public Optional<Inventory> retrieve(String id) {
-    // TODO
-    return Optional.empty();
+    return Optional.ofNullable(this.mongoTemplate.findById(id, Inventory.class));
   }
 
   /**
    * Update Inventory.
-   * @param id Inventory id to Update.
+   *
+   * @param id        Inventory id to Update.
    * @param inventory Inventory to Update.
    * @return Updated Inventory.
    */
+
   public Optional<Inventory> update(String id, Inventory inventory) {
-    // TODO
+    Inventory existingInventory = this.mongoTemplate.findById(id, Inventory.class);
+    if (existingInventory != null) {
+      inventory.setId(id);
+      return Optional.of(this.mongoTemplate.save(inventory));
+    }
     return Optional.empty();
   }
 
   /**
    * Delete Inventory By Id.
-   * @param id Id of Inventory.
+   *
+   * @param id ID of Inventory.
    * @return Deleted Inventory.
    */
+
+  // CORRECTED 07/22/2024
   public Optional<Inventory> delete(String id) {
-    // TODO
-    return Optional.empty();
+    Inventory inventory = this.mongoTemplate.findAndRemove(Query.query(Criteria.where("id").is(id)), Inventory.class);
+    return Optional.ofNullable(inventory);
   }
 }
