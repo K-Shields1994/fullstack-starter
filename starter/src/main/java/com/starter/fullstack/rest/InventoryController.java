@@ -60,5 +60,6 @@ public class InventoryController {
   public Inventory delete(@PathVariable String id) {
     return this.inventoryDAO.delete(id).orElse(null);
   }
+
 }
 

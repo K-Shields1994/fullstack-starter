@@ -106,6 +106,7 @@ public class InventoryControllerTest {
 
     Assert.assertEquals(0, this.mongoTemplate.findAll(Inventory.class).size());
   }
+
 }
 
 
