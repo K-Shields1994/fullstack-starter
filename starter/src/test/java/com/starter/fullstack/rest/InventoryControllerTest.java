@@ -15,11 +15,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -65,10 +62,10 @@ public class InventoryControllerTest {
    */
   @Test
   public void findAll() throws Throwable {
-    this.mockMvc.perform(get(URL_TEMPLATE) //FIXED
+    this.mockMvc.perform(MockMvcRequestBuilders.get(URL_TEMPLATE) //FIXED
         .accept(MediaType.APPLICATION_JSON))
-      .andExpect(status().isOk())
-      .andExpect(content().json("[" + this.objectMapper.writeValueAsString(inventory) + "]"));
+      .andExpect(MockMvcResultMatchers.status().isOk())
+      .andExpect(MockMvcResultMatchers.content().json("[" + this.objectMapper.writeValueAsString(inventory) + "]"));
   }
 
   /**
@@ -81,14 +78,28 @@ public class InventoryControllerTest {
     this.inventory = new Inventory();
     this.inventory.setId(OTHER_INV_ID); //FIXED
     this.inventory.setName(ALSO_INV_NAME); //FIXED
-    this.mockMvc.perform(post(URL_TEMPLATE)
+    this.mockMvc.perform(MockMvcRequestBuilders.post(URL_TEMPLATE)
         .accept(MediaType.APPLICATION_JSON)
         .contentType(MediaType.APPLICATION_JSON)
         .content(this.objectMapper.writeValueAsString(this.inventory)))
-      .andExpect(status().isOk());
+      .andExpect(MockMvcResultMatchers.status().isOk());
 
     Assert.assertEquals(2, this.mongoTemplate.findAll(Inventory.class).size());
   }
+
+  /**
+   * Test delete endpoint.
+   *
+   * @throws Throwable see MockMvc
+   */
+  @Test
+  public void deleteInventory() throws Throwable {
+    this.mockMvc.perform(MockMvcRequestBuilders.delete(URL_TEMPLATE + "/" + this.inventory.getId())
+        .accept(MediaType.APPLICATION_JSON))
+      .andExpect(MockMvcResultMatchers.status().isOk())
+      .andExpect(MockMvcResultMatchers.content().json(this.objectMapper.writeValueAsString(this.inventory)));
+
+    Assert.assertEquals(0, this.mongoTemplate.findAll(Inventory.class).size());
+  }
+
 }
-
-
